@@ -2,10 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:SiemensS7CU/SiemensS7CU.xcodeproj">
+      location = "group:CMakeLists.txt">
    </FileRef>
    <FileRef
-      location = "group:CMakeLists.txt">
+      location = "group:SiemensS7CU/SiemensS7CU.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:SiemensS7DeviceDriver/SiemensS7DeviceDriver.xcodeproj">
