@@ -5,6 +5,9 @@
       location = "group:CMakeLists.txt">
    </FileRef>
    <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
       location = "group:SiemensS7ControlUnit/SiemensS7ControlUnit.xcodeproj">
    </FileRef>
    <FileRef
