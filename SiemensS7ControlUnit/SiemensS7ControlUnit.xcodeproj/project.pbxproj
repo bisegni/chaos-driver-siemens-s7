@@ -28,7 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3203CBEA17C392ED000C9FE8 /* SiemensS7CU */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SiemensS7CU; sourceTree = BUILT_PRODUCTS_DIR; };
+		3203CBEA17C392ED000C9FE8 /* SiemensS7ControlUnit */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SiemensS7ControlUnit; sourceTree = BUILT_PRODUCTS_DIR; };
 		3203CBF717C39305000C9FE8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		3203CBF817C39305000C9FE8 /* S7ControlUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = S7ControlUnit.cpp; sourceTree = "<group>"; };
 		3203CBF917C39305000C9FE8 /* S7ControlUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S7ControlUnit.h; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 		3203CBEB17C392ED000C9FE8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3203CBEA17C392ED000C9FE8 /* SiemensS7CU */,
+				3203CBEA17C392ED000C9FE8 /* SiemensS7ControlUnit */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,9 +101,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3203CBE917C392ED000C9FE8 /* SiemensS7CU */ = {
+		3203CBE917C392ED000C9FE8 /* SiemensS7ControlUnit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3203CBF317C392ED000C9FE8 /* Build configuration list for PBXNativeTarget "SiemensS7CU" */;
+			buildConfigurationList = 3203CBF317C392ED000C9FE8 /* Build configuration list for PBXNativeTarget "SiemensS7ControlUnit" */;
 			buildPhases = (
 				3203CBE617C392ED000C9FE8 /* Sources */,
 				3203CBE717C392ED000C9FE8 /* Frameworks */,
@@ -113,9 +113,9 @@
 			);
 			dependencies = (
 			);
-			name = SiemensS7CU;
+			name = SiemensS7ControlUnit;
 			productName = SiemensS7CU;
-			productReference = 3203CBEA17C392ED000C9FE8 /* SiemensS7CU */;
+			productReference = 3203CBEA17C392ED000C9FE8 /* SiemensS7ControlUnit */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -127,7 +127,7 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = infn;
 			};
-			buildConfigurationList = 3203CBE517C392ED000C9FE8 /* Build configuration list for PBXProject "SiemensS7CU" */;
+			buildConfigurationList = 3203CBE517C392ED000C9FE8 /* Build configuration list for PBXProject "SiemensS7ControlUnit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -139,7 +139,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3203CBE917C392ED000C9FE8 /* SiemensS7CU */,
+				3203CBE917C392ED000C9FE8 /* SiemensS7ControlUnit */,
 			);
 		};
 /* End PBXProject section */
@@ -252,7 +252,7 @@
 					"-lchaos_common",
 					"-lchaos_cutoolkit",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SiemensS7ControlUnit;
 			};
 			name = Debug;
 		};
@@ -279,14 +279,14 @@
 					"-lchaos_common",
 					"-lchaos_cutoolkit",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SiemensS7ControlUnit;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3203CBE517C392ED000C9FE8 /* Build configuration list for PBXProject "SiemensS7CU" */ = {
+		3203CBE517C392ED000C9FE8 /* Build configuration list for PBXProject "SiemensS7ControlUnit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3203CBF117C392ED000C9FE8 /* Debug */,
@@ -295,13 +295,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3203CBF317C392ED000C9FE8 /* Build configuration list for PBXNativeTarget "SiemensS7CU" */ = {
+		3203CBF317C392ED000C9FE8 /* Build configuration list for PBXNativeTarget "SiemensS7ControlUnit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3203CBF417C392ED000C9FE8 /* Debug */,
 				3203CBF517C392ED000C9FE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,3 +7,8 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 *.xcuserstate
+*.xcuserdatadbuild
+SiemensS7ControlUnit/SiemensS7ControlUnit.xcodeproj/xcuserdata/*
+SiemensS7.xcworkspace/xcuserdata/*
+build/SiemensS7ControlUnit
+build/SiemensS7DeviceDriver.extension

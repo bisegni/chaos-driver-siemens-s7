@@ -5,7 +5,7 @@
       location = "group:CMakeLists.txt">
    </FileRef>
    <FileRef
-      location = "group:SiemensS7CU/SiemensS7CU.xcodeproj">
+      location = "group:SiemensS7ControlUnit/SiemensS7ControlUnit.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:SiemensS7DeviceDriver/SiemensS7DeviceDriver.xcodeproj">
