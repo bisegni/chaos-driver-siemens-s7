@@ -7,3 +7,4 @@ Makefile
 SiemensS7DeviceDriver.extension
 cmake_install.cmake
 install_manifest.txt
+xcuserdata*
