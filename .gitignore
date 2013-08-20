@@ -1,0 +1,9 @@
+DerivedData
+CMakeCache.txt
+CMakeFiles
+bin
+lib
+Makefile
+SiemensS7DeviceDriver.extension
+cmake_install.cmake
+install_manifest.txt

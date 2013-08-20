@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>78B6C5CF-AF73-4676-8DC8-1B285AF3AB33</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SiemensS7</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>60862242-8A09-4942-95B3-1F0C2AC430F4</key>
+		<string>ssh://cvs.lnf.infn.it:29418/CHOAS-SiemensS7-Driver</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SiemensS7.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>60862242-8A09-4942-95B3-1F0C2AC430F4</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://cvs.lnf.infn.it:29418/CHOAS-SiemensS7-Driver</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>60862242-8A09-4942-95B3-1F0C2AC430F4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>60862242-8A09-4942-95B3-1F0C2AC430F4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SiemensS7</string>
+		</dict>
+	</array>
+</dict>
+</plist>
