@@ -1,2 +1,2 @@
-!CHAOS Siemens S& device driver and Control unit
+!CHAOS Siemens S7 driver and control unit
 ==============
