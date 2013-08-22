@@ -1,5 +1,5 @@
 /*
- *	Sl7TcpDriver.h
+ *	SiemensS7TcpDriver.h
  *	!CHOAS
  *	Created by Bisegni Claudio.
  *
@@ -27,12 +27,12 @@
 
 namespace cu_driver = chaos::cu::driver_manager::driver;
 
-DEFINE_CU_DRIVER_DEFINITION_PROTOTYPE(Sl7TcpDriver)
+DEFINE_CU_DRIVER_DEFINITION_PROTOTYPE(SiemensS7TcpDriver)
 
 /*
  driver definition
  */
-class Sl7TcpDriver: ADD_CU_DRIVER_PLUGIN_SUPERCLASS {
+class SiemensS7TcpDriver: ADD_CU_DRIVER_PLUGIN_SUPERCLASS {
     
 	//conenction information
 	daveInterface *di;
@@ -45,10 +45,10 @@ class Sl7TcpDriver: ADD_CU_DRIVER_PLUGIN_SUPERCLASS {
 	void driverInit(const char *initParameter) throw(chaos::CException);
 	void driverDeinit() throw(chaos::CException);
 public:
-    Sl7TcpDriver();
-	~Sl7TcpDriver();
+    SiemensS7TcpDriver();
+	~SiemensS7TcpDriver();
     //! Execute a command
 	cu_driver::MsgManagmentResultType::MsgManagmentResult execOpcode(cu_driver::DrvMsgPtr cmd);
 };
 
-#endif /* defined(__ControlUnitTest__Sl7TcpDriver__) */
+#endif /* defined(__ControlUnitTest__SiemensS7TcpDriver__) */

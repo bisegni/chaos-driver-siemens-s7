@@ -21,7 +21,7 @@
 #ifndef __ControlUnitTest__S7ControlUnit__
 #define __ControlUnitTest__S7ControlUnit__
 
-#include <chaos/cu_toolkit/ControlManager/SCAbstractControlUnit.h>
+#include <chaos/cu_toolkit/ControlManager/RTAbstractControlUnit.h>
 
 using namespace std;
 using namespace chaos;
@@ -30,41 +30,49 @@ using namespace boost::posix_time;
 
 namespace cu_driver = chaos::cu::driver_manager::driver;
 
-class S7ControlUnit : public chaos::cu::SCAbstractControlUnit {
-    string _deviceID;
+typedef struct t_plc_variable{
+	int db_num;
+	int start;
+	int byte_count;
+	chaos::DataType::DataType type;
+} t_plc_variable;
+
+class S7ControlUnit : public chaos::cu::RTAbstractControlUnit {
+    string deviceID;
+	string definitionParamter;
 protected:
-    /*
-     Define the Control Unit Dataset and Actions
-     */
+    //define dataset
     void unitDefineActionAndDataset()throw(CException);
-    void defineSharedVariable();
-    void unitDefineDriver(std::vector<cu_driver::DrvRequestInfo>& neededDriver);
-    /*(Optional)
-     Initialize the Control Unit and all driver, with received param from MetadataServer
-     */
+    
+	//defin control unit driver
+	void unitDefineDriver(std::vector<chaos::cu::driver_manager::driver::DrvRequestInfo>& neededDriver);
+	
+    // init contorl unit
     void unitInit() throw(CException);
-    /*(Optional)
-     Execute the work, this is called with a determinated delay, it must be as fast as possible
-     */
+    
+	//start contor unit
     void unitStart() throw(CException);
-    /*(Optional)
-     The Control Unit will be stopped
-     */
+    
+	//intervalled scheduled method
+    void unitRun() throw(CException);
+    
+    //stop contor unit
     void unitStop() throw(CException);
-    /*(Optional)
-     The Control Unit will be deinitialized and disposed
-     */
+    
+    //deinit
     void unitDeinit() throw(CException);
 public:
     /*
      Construct a new CU with an identifier
      */
-    S7ControlUnit(string&);
+    S7ControlUnit(string _deviceID, string _definitionParamter);
 	
 	/*
      Base destructor
      */
 	~S7ControlUnit();
+	
+	static bool checkDefinitionparam(string& defParam);
 };
 
 

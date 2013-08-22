@@ -1,8 +1,8 @@
-/*	
+/*
  *	ControlUnitTest.cpp
  *	!CHOAS
  *	Created by Bisegni Claudio.
- *	
+ *
  *    	Copyright 2012 INFN, National Institute of Nuclear Physics
  *
  *    	Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,17 +19,18 @@
  */
 
 #include "S7ControlUnit.h"
-#include "S7TcpDriver.h"
+#include "SiemensS7TcpDriver.h"
 
 #include <chaos/common/chaos_constants.h>
 #include <chaos/cu_toolkit/ChaosCUToolkit.h>
+#include <chaos/common/exception/CException.h>
 
 #include <iostream>
 #include <string>
 
 /*! \page page_example_cue ChaosCUToolkit Example
  *  \section page_example_cue_sec An basic usage for the ChaosCUToolkit package
- *  
+ *
  *  \subsection page_example_cue_sec_sub1 Toolkit usage
  *  ChaosCUToolkit has private constructor so it can be used only using singleton pattern,
  *  the only way to get unique isntance is; ChaosCUToolkit::getInstance(). So the first call of
@@ -56,37 +57,41 @@ namespace common_plugin = chaos::common::plugin;
 namespace common_utility = chaos::common::utility;
 namespace cu_driver_manager = chaos::cu::driver_manager;
 
-#define OPT_CUSTOM_DEVICE_ID_A "device_a"
-#define OPT_CUSTOM_DEVICE_ID_B "device_b"
-
+#define OPT_DEVICE_ID "device_id"
+#define OPT_PARAM_STR "def_param"
 
 int main (int argc, char* argv[] )
 {
     string tmpDeviceID;
-    //! [Custom Option]
+	string tmpDefinitionParam;
     try {
-    ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->addOption(OPT_CUSTOM_DEVICE_ID_A, po::value<string>(), "Real Time wave simultaion Device A identification string");
-    ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->addOption(OPT_CUSTOM_DEVICE_ID_B, po::value<string>(), "Slow Controlled wave simulation Device B identification string");
-    //! [Custom Option]
-    
-	//! [Driver Registration]
-	MATERIALIZE_INSTANCE_AND_INSPECTOR(Sl7TcpDriver)
-	cu_driver_manager::DriverManager::getInstance()->registerDriver(Sl7TcpDriverInstancer, Sl7TcpDriverInspector);
-    //! [Driver Registration]
+		//! [Custom Option]
+		ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->addOption(OPT_DEVICE_ID, po::value<string>(&tmpDeviceID), "Specify the device id of the siemen s7 plc");
+		ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->addOption(OPT_PARAM_STR, po::value<string>(&tmpDefinitionParam), "String representing the configuration of the control unit with the sintax (type1:db_num1:start1:offset1|type1:db_num2:start2:offset2|...) type respect the DataType int value");
+		//! [Custom Option]
 		
-    ChaosCUToolkit::getInstance()->init(argc, argv);
-    //! [CUTOOLKIT Init]
-    
-    //! [Adding the CustomControlUnit]
-    if(ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->hasOption(OPT_CUSTOM_DEVICE_ID_B)){
-        tmpDeviceID = ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->getOption<string>(OPT_CUSTOM_DEVICE_ID_B);
-        ChaosCUToolkit::getInstance()->addControlUnit(new S7ControlUnit(tmpDeviceID));
-    }
-    //! [Adding the CustomControlUnit]
-    
-    //! [Starting the Framework]
-    ChaosCUToolkit::getInstance()->start();
-    //! [Starting the Framework]
+		//! [CUTOOLKIT Init]
+		ChaosCUToolkit::getInstance()->init(argc, argv);
+		if(!ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->hasOption(OPT_DEVICE_ID)) throw CException(1, "device id option is mandatory", __FUNCTION__);
+		if(!ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->hasOption(OPT_PARAM_STR)) throw CException(2, "the paramtere string is madatory", __FUNCTION__);
+		
+		//check if the definition stirng is wel formed
+		if(!S7ControlUnit::checkDefinitionparam(tmpDefinitionParam)) throw CException(3, "The definition string is not wel formed", __FUNCTION__);
+		
+		//! [CUTOOLKIT Init]
+		
+		//! [Driver Registration]
+		MATERIALIZE_INSTANCE_AND_INSPECTOR(SiemensS7TcpDriver)
+		cu_driver_manager::DriverManager::getInstance()->registerDriver(SiemensS7TcpDriverInstancer, SiemensS7TcpDriverInspector);
+		//! [Driver Registration]
+
+		//! [Adding the CustomControlUnit]
+		ChaosCUToolkit::getInstance()->addControlUnit(new S7ControlUnit(tmpDeviceID, tmpDefinitionParam));
+		//! [Adding the CustomControlUnit]
+		
+		//! [Starting the Framework]
+		ChaosCUToolkit::getInstance()->start();
+		//! [Starting the Framework]
     } catch (CException& e) {
         cerr<<"Exception::"<<endl;
         std::cerr<< "in:"<<e.errorDomain << std::endl;
@@ -96,6 +101,6 @@ int main (int argc, char* argv[] )
     } catch (...){
         cerr << "unexpected exception caught.. " << endl;
     }
-
+	
     return 0;
 }

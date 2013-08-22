@@ -1,5 +1,5 @@
 /*
- *	Sl7TcpDriver.h
+ *	SiemensS7TcpDriver.h
  *	!CHOAS
  *	Created by Bisegni Claudio.
  *
@@ -17,7 +17,7 @@
  *    	See the License for the specific language governing permissions and
  *    	limitations under the License.
  */
-#include "S7TcpDriver.h"
+#include "SiemensS7TcpDriver.h"
 
 #include <string>
 
@@ -27,9 +27,9 @@
 
 namespace cu_driver = chaos::cu::driver_manager::driver;
 
-#define SL7DRVLAPP_		LAPP_ << "[Sl7TcpDriver] "
-#define SL7DRVLDBG_		LDBG_ << "[Sl7TcpDriver] "
-#define SL7DRVLERR_		LERR_ << "[Sl7TcpDriver] "
+#define SL7DRVLAPP_		LAPP_ << "[SiemensS7TcpDriver] "
+#define SL7DRVLDBG_		LDBG_ << "[SiemensS7TcpDriver] "
+#define SL7DRVLERR_		LERR_ << "[SiemensS7TcpDriver] "
 
 
 //! Regular expression for check server hostname and port
@@ -40,21 +40,26 @@ static const boost::regex PlcIpAnPort("(\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][
 
 //GET_PLUGIN_CLASS_DEFINITION
 //we need only to define the driver because we don't are makeing a plugin
-OPEN_CU_DRIVER_PLUGIN_CLASS_DEFINITION(Sl7TcpDriver, 1.0.0, Sl7TcpDriver)
-REGISTER_CU_DRIVER_PLUGIN_CLASS_INIT_ATTRIBUTE(Sl7Drv,http_address/dnsname:port)
+OPEN_CU_DRIVER_PLUGIN_CLASS_DEFINITION(SiemensS7TcpDriver, 1.0.0, SiemensS7TcpDriver)
+REGISTER_CU_DRIVER_PLUGIN_CLASS_INIT_ATTRIBUTE(SiemensS7TcpDriver,http_address/dnsname:port)
 CLOSE_CU_DRIVER_PLUGIN_CLASS_DEFINITION
 
+//register the two plugin
+OPEN_REGISTER_PLUGIN
+REGISTER_PLUGIN(SiemensS7TcpDriver)
+CLOSE_REGISTER_PLUGIN
+
 //default constructor definition
-DEFAULT_CU_DRIVER_PLUGIN_CONSTRUCTOR(Sl7TcpDriver) {
+DEFAULT_CU_DRIVER_PLUGIN_CONSTRUCTOR(SiemensS7TcpDriver) {
 	
 }
 
 //default descrutcor
-Sl7TcpDriver::~Sl7TcpDriver() {
+SiemensS7TcpDriver::~SiemensS7TcpDriver() {
 	
 }
 
-void Sl7TcpDriver::driverInit(const char *initParameter) throw(chaos::CException) {
+void SiemensS7TcpDriver::driverInit(const char *initParameter) throw(chaos::CException) {
 	SL7DRVLAPP_ << "Init siemens s7 plc driver";
 	//check the input parameter
 	boost::smatch match;
@@ -64,7 +69,7 @@ void Sl7TcpDriver::driverInit(const char *initParameter) throw(chaos::CException
 	
 	if(!isIpAndPort && !isHostnameAndPort) {
 		SL7DRVLERR_ << "The address " << inputStr << " is not well formed";
-		throw new chaos::CException(1, "the initialization paramter for the siemens sl7 is not well formed", "Sl7TcpDriver::driverInit");
+		throw new chaos::CException(1, "the initialization paramter for the siemens sl7 is not well formed", "SiemensS7TcpDriver::driverInit");
 	}
 	
 	std::string address = match[1];
@@ -88,15 +93,15 @@ void Sl7TcpDriver::driverInit(const char *initParameter) throw(chaos::CException
 			if(dc) daveDisconnectPLC(dc);
 			if(fds.rfd)closeSocket(fds.rfd);
 			SL7DRVLERR_ << "Error opening address";
-			throw new chaos::CException(2, "Error opening address", "Sl7TcpDriver::driverInit");
+			throw new chaos::CException(2, "Error opening address", "SiemensS7TcpDriver::driverInit");
 		}
 	} else {
 		SL7DRVLERR_ << "Error opening address";
-		throw new chaos::CException(3, "Error opening address", "Sl7TcpDriver::driverInit");
+		throw new chaos::CException(3, "Error opening address", "SiemensS7TcpDriver::driverInit");
 	}
 }
 
-void Sl7TcpDriver::driverDeinit() throw(chaos::CException) {
+void SiemensS7TcpDriver::driverDeinit() throw(chaos::CException) {
 	SL7DRVLAPP_ << "Deinit siemens s7 plc driver";
 	if(dc) {
 		daveDisconnectPLC(dc);
@@ -110,7 +115,7 @@ void Sl7TcpDriver::driverDeinit() throw(chaos::CException) {
 }
 
 //! Execute a command
-cu_driver::MsgManagmentResultType::MsgManagmentResult Sl7TcpDriver::execOpcode(cu_driver::DrvMsgPtr cmd) {
+cu_driver::MsgManagmentResultType::MsgManagmentResult SiemensS7TcpDriver::execOpcode(cu_driver::DrvMsgPtr cmd) {
 	cu_driver::MsgManagmentResultType::MsgManagmentResult result = cu_driver::MsgManagmentResultType::MMR_EXECUTED;
 	return result;
 }
