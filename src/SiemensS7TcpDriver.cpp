@@ -40,26 +40,26 @@ static const boost::regex PlcIpAnPort("(\\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][
 
 //GET_PLUGIN_CLASS_DEFINITION
 //we need only to define the driver because we don't are makeing a plugin
-OPEN_CU_DRIVER_PLUGIN_CLASS_DEFINITION(SiemensS7TcpDriver, 1.0.0, SiemensS7TcpDriver)
+OPEN_CU_DRIVER_PLUGIN_CLASS_DEFINITION(SiemensS7TcpDriver, 1.0.0, chaos::cu::driver_manager::driver::siemens_s7::SiemensS7TcpDriver)
 REGISTER_CU_DRIVER_PLUGIN_CLASS_INIT_ATTRIBUTE(SiemensS7TcpDriver,http_address/dnsname:port)
 CLOSE_CU_DRIVER_PLUGIN_CLASS_DEFINITION
 
 //register the two plugin
 OPEN_REGISTER_PLUGIN
-REGISTER_PLUGIN(SiemensS7TcpDriver)
+REGISTER_PLUGIN(chaos::cu::driver_manager::driver::siemens_s7::SiemensS7TcpDriver)
 CLOSE_REGISTER_PLUGIN
 
 //default constructor definition
-DEFAULT_CU_DRIVER_PLUGIN_CONSTRUCTOR(SiemensS7TcpDriver) {
+DEFAULT_CU_DRIVER_PLUGIN_CONSTRUCTOR_WITH_NS(chaos::cu::driver_manager::driver::siemens_s7, SiemensS7TcpDriver) {
 	
 }
 
 //default descrutcor
-SiemensS7TcpDriver::~SiemensS7TcpDriver() {
+cu_driver::siemens_s7::SiemensS7TcpDriver::~SiemensS7TcpDriver() {
 	
 }
 
-void SiemensS7TcpDriver::driverInit(const char *initParameter) throw(chaos::CException) {
+void cu_driver::siemens_s7::SiemensS7TcpDriver::driverInit(const char *initParameter) throw(chaos::CException) {
 	SL7DRVLAPP_ << "Init siemens s7 plc driver";
 	//check the input parameter
 	boost::smatch match;
@@ -101,7 +101,7 @@ void SiemensS7TcpDriver::driverInit(const char *initParameter) throw(chaos::CExc
 	}
 }
 
-void SiemensS7TcpDriver::driverDeinit() throw(chaos::CException) {
+void cu_driver::siemens_s7::SiemensS7TcpDriver::driverDeinit() throw(chaos::CException) {
 	SL7DRVLAPP_ << "Deinit siemens s7 plc driver";
 	if(dc) {
 		daveDisconnectPLC(dc);
@@ -114,8 +114,15 @@ void SiemensS7TcpDriver::driverDeinit() throw(chaos::CException) {
 
 }
 
-//! Execute a command
-cu_driver::MsgManagmentResultType::MsgManagmentResult SiemensS7TcpDriver::execOpcode(cu_driver::DrvMsgPtr cmd) {
-	cu_driver::MsgManagmentResultType::MsgManagmentResult result = cu_driver::MsgManagmentResultType::MMR_EXECUTED;
-	return result;
+cu_driver::MsgManagmentResultType::MsgManagmentResult cu_driver::siemens_s7::SiemensS7TcpDriver::getDouble(t_variable_struct& variable_info, void *mem_for_result) {
+	int res = 0;
+	double *usr_doub_ptr = static_cast<double*>(mem_for_result);
+	res=daveReadBytes(dc, daveDB, variable_info.db_num, variable_info.start, variable_info.byte_count, NULL);
+	if(0==res) {
+		*usr_doub_ptr = daveGetFloat(dc);
+		return cu_driver::MsgManagmentResultType::MMR_EXECUTED;
+	} else {
+		return cu_driver::MsgManagmentResultType::MMR_ERROR;
+	}
+	
 }

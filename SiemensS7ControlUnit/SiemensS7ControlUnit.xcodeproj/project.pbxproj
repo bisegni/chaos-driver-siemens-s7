@@ -13,6 +13,7 @@
 		3203CC0717C39305000C9FE8 /* openSocket.c in Sources */ = {isa = PBXBuildFile; fileRef = 3203CBFE17C39305000C9FE8 /* openSocket.c */; };
 		3203CC0817C39305000C9FE8 /* setport.c in Sources */ = {isa = PBXBuildFile; fileRef = 3203CC0017C39305000C9FE8 /* setport.c */; };
 		3203CC0917C39305000C9FE8 /* SiemensS7TcpDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3203CC0217C39305000C9FE8 /* SiemensS7TcpDriver.cpp */; };
+		328CB60417C77EFE003EFD6D /* SiemensS7DriverSwitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 328CB60317C77EFE003EFD6D /* SiemensS7DriverSwitch.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,8 @@
 		3203CC0117C39305000C9FE8 /* setport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setport.h; sourceTree = "<group>"; };
 		3203CC0217C39305000C9FE8 /* SiemensS7TcpDriver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SiemensS7TcpDriver.cpp; sourceTree = "<group>"; };
 		3203CC0317C39305000C9FE8 /* SiemensS7TcpDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiemensS7TcpDriver.h; sourceTree = "<group>"; };
+		328CB60317C77EFE003EFD6D /* SiemensS7DriverSwitch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SiemensS7DriverSwitch.cpp; path = s7lib/SiemensS7DriverSwitch.cpp; sourceTree = "<group>"; };
+		328CB60517C79335003EFD6D /* SiemensS7TcpDriverTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SiemensS7TcpDriverTypes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,9 +79,11 @@
 				3203CBF717C39305000C9FE8 /* main.cpp */,
 				3203CBF817C39305000C9FE8 /* S7ControlUnit.cpp */,
 				3203CBF917C39305000C9FE8 /* S7ControlUnit.h */,
-				3203CBFA17C39305000C9FE8 /* s7lib */,
+				328CB60317C77EFE003EFD6D /* SiemensS7DriverSwitch.cpp */,
 				3203CC0217C39305000C9FE8 /* SiemensS7TcpDriver.cpp */,
 				3203CC0317C39305000C9FE8 /* SiemensS7TcpDriver.h */,
+				328CB60517C79335003EFD6D /* SiemensS7TcpDriverTypes.h */,
+				3203CBFA17C39305000C9FE8 /* s7lib */,
 			);
 			name = src;
 			path = ../src;
@@ -151,6 +156,7 @@
 			files = (
 				3203CC0717C39305000C9FE8 /* openSocket.c in Sources */,
 				3203CC0817C39305000C9FE8 /* setport.c in Sources */,
+				328CB60417C77EFE003EFD6D /* SiemensS7DriverSwitch.cpp in Sources */,
 				3203CC0417C39305000C9FE8 /* main.cpp in Sources */,
 				3203CC0617C39305000C9FE8 /* nodave.c in Sources */,
 				3203CC0517C39305000C9FE8 /* S7ControlUnit.cpp in Sources */,

@@ -20,35 +20,54 @@
 #ifndef __ControlUnitTest__TestDeviceDriver__
 #define __ControlUnitTest__TestDeviceDriver__
 
+#include "SiemensS7TcpDriverTypes.h"
 #include "s7lib/nodave.h"
 #include "s7lib/openSocket.h"
 
 #include <chaos/cu_toolkit/driver_manager/driver/AbstractDriverPlugin.h>
 
-namespace cu_driver = chaos::cu::driver_manager::driver;
-
+//this need to be out the nasmespace
 DEFINE_CU_DRIVER_DEFINITION_PROTOTYPE(SiemensS7TcpDriver)
 
-/*
- driver definition
- */
-class SiemensS7TcpDriver: ADD_CU_DRIVER_PLUGIN_SUPERCLASS {
-    
-	//conenction information
-	daveInterface *di;
-    daveConnection *dc;
-    daveFileDescriptors fds;
-	
-	inline cu_driver::MsgManagmentResultType::MsgManagmentResult initPLCConnection(cu_driver::DrvMsgPtr initPack);
-	inline cu_driver::MsgManagmentResultType::MsgManagmentResult deinitPLCConnection();
-	
-	void driverInit(const char *initParameter) throw(chaos::CException);
-	void driverDeinit() throw(chaos::CException);
-public:
-    SiemensS7TcpDriver();
-	~SiemensS7TcpDriver();
-    //! Execute a command
-	cu_driver::MsgManagmentResultType::MsgManagmentResult execOpcode(cu_driver::DrvMsgPtr cmd);
-};
+namespace chaos {
+	namespace cu {
+		namespace driver_manager {
+			namespace driver {
+				namespace siemens_s7 {
+					//namespace cu_driver = chaos::cu::driver_manager::driver;
+					
+					/*
+					 driver definition
+					 */
+					class SiemensS7TcpDriver: ADD_CU_DRIVER_PLUGIN_SUPERCLASS {
+						
+						//conenction information
+						daveInterface *di;
+						daveConnection *dc;
+						daveFileDescriptors fds;
+						
+						inline driver::MsgManagmentResultType::MsgManagmentResult initPLCConnection(driver::DrvMsgPtr initPack);
+						inline driver::MsgManagmentResultType::MsgManagmentResult deinitPLCConnection();
+						
+						void driverInit(const char *initParameter) throw(chaos::CException);
+						void driverDeinit() throw(chaos::CException);
+						
+					protected:
+						//! Return a variable of the type boolean
+						/*!
+						 */
+						driver::MsgManagmentResultType::MsgManagmentResult getDouble(t_variable_struct& variable_info, void *mem_for_result);
+						
+					public:
+						SiemensS7TcpDriver();
+						~SiemensS7TcpDriver();
+						//! Execute a command
+						driver::MsgManagmentResultType::MsgManagmentResult execOpcode(driver::DrvMsgPtr cmd);
+					};
+				}
+			}
+		}
+	}
+}
 
 #endif /* defined(__ControlUnitTest__SiemensS7TcpDriver__) */

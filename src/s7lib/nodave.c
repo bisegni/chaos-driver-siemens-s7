@@ -25,12 +25,10 @@
  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/*
- * We import epicsEndian.h to ensure that the code works correctly on big
- * and little endian architectures.
- */
+#include <chaos/common/endian.h>
 
-#if EPICS_BYTE_ORDER == EPICS_ENDIAN_LITTLE
+
+#if __CHAOS_LITTLE_ENDIAN__ == 1
 #define DAVE_LITTLE_ENDIAN
 #endif
 

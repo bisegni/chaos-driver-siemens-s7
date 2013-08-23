@@ -1,9 +1,9 @@
 /*
- *	ControlUnitTest.cpp
+ *	main.cpp
  *	!CHOAS
  *	Created by Bisegni Claudio.
  *
- *    	Copyright 2012 INFN, National Institute of Nuclear Physics
+ *    	Copyright 2013 INFN, National Institute of Nuclear Physics
  *
  *    	Licensed under the Apache License, Version 2.0 (the "License");
  *    	you may not use this file except in compliance with the License.
@@ -36,18 +36,6 @@
  *  the only way to get unique isntance is; ChaosCUToolkit::getInstance(). So the first call of
  *  getInstance method will provide the CUToolkit and Common layer initial setup.
  *  \snippet example/ControlUnitTest/ControlUnitExample.cpp Custom Option
- *
- *  Then it must be initialized, in this method can be passed the main argument
- *  of a c or c++ programm
- *  \snippet example/ControlUnitTest/ControlUnitExample.cpp CUTOOLKIT Init
- *
- *  At this point the custom implementation af a control unit cab be added to framework
- *  \snippet example/ControlUnitTest/ControlUnitExample.cpp Adding the CustomControlUnit
- *
- *  At this step the framework can be started, it will perform all needs, comunicate with
- *  Metadata Server and all chaos workflow will start. The start method call will block the main execution
- *  until the chaos workflow of this isnstance need to be online
- *  \snippet example/ControlUnitTest/ControlUnitExample.cpp Starting the Framework
  */
 using namespace std;
 using namespace chaos;
@@ -56,46 +44,51 @@ using namespace chaos::cu;
 namespace common_plugin = chaos::common::plugin;
 namespace common_utility = chaos::common::utility;
 namespace cu_driver_manager = chaos::cu::driver_manager;
+namespace siemens_driver_ns = chaos::cu::driver_manager::driver::siemens_s7;
 
-#define OPT_DEVICE_ID "device_id"
-#define OPT_PARAM_STR "def_param"
+#define OPT_ADDRESS_PORT	"address"
+#define OPT_DEVICE_ID		"device_id"
+#define OPT_PARAM_STR		"def_param"
 
 int main (int argc, char* argv[] )
 {
-    string tmpDeviceID;
-	string tmpDefinitionParam;
+    string tmp_device_id;
+	string tmp_definition_param;
+	string tmp_address;
     try {
 		//! [Custom Option]
-		ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->addOption(OPT_DEVICE_ID, po::value<string>(&tmpDeviceID), "Specify the device id of the siemen s7 plc");
-		ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->addOption(OPT_PARAM_STR, po::value<string>(&tmpDefinitionParam), "String representing the configuration of the control unit with the sintax (type1:db_num1:start1:offset1|type1:db_num2:start2:offset2|...) type respect the DataType int value");
+		ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->addOption(OPT_ADDRESS_PORT, po::value<string>(&tmp_address), "Specify address of the plc (address:port)");
+		ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->addOption(OPT_DEVICE_ID, po::value<string>(&tmp_device_id), "Specify the device id of the siemen s7 plc");
+		ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->addOption(OPT_PARAM_STR, po::value<string>(&tmp_definition_param), "String representing the configuration of the control unit with the sintax (name:type:db_num:start:offset:max_len|...) type respect the DataType int value");
 		//! [Custom Option]
 		
 		//! [CUTOOLKIT Init]
 		ChaosCUToolkit::getInstance()->init(argc, argv);
-		if(!ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->hasOption(OPT_DEVICE_ID)) throw CException(1, "device id option is mandatory", __FUNCTION__);
-		if(!ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->hasOption(OPT_PARAM_STR)) throw CException(2, "the paramtere string is madatory", __FUNCTION__);
+		if(!ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->hasOption(OPT_ADDRESS_PORT)) throw CException(1, "address is madatory", __FUNCTION__);
+		if(!ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->hasOption(OPT_DEVICE_ID)) throw CException(2, "device id option is mandatory", __FUNCTION__);
+		if(!ChaosCUToolkit::getInstance()->getGlobalConfigurationInstance()->hasOption(OPT_PARAM_STR)) throw CException(3, "the paramtere string is madatory", __FUNCTION__);
 		
 		//check if the definition stirng is wel formed
-		if(!S7ControlUnit::checkDefinitionparam(tmpDefinitionParam)) throw CException(3, "The definition string is not wel formed", __FUNCTION__);
+		if(!S7ControlUnit::checkDefinitionparam(tmp_definition_param)) throw CException(3, "The definition string is not wel formed", __FUNCTION__);
 		
 		//! [CUTOOLKIT Init]
 		
 		//! [Driver Registration]
-		MATERIALIZE_INSTANCE_AND_INSPECTOR(SiemensS7TcpDriver)
+		MATERIALIZE_INSTANCE_AND_INSPECTOR_WITH_NS(siemens_driver_ns, SiemensS7TcpDriver)
 		cu_driver_manager::DriverManager::getInstance()->registerDriver(SiemensS7TcpDriverInstancer, SiemensS7TcpDriverInspector);
 		//! [Driver Registration]
 
 		//! [Adding the CustomControlUnit]
-		ChaosCUToolkit::getInstance()->addControlUnit(new S7ControlUnit(tmpDeviceID, tmpDefinitionParam));
+		ChaosCUToolkit::getInstance()->addControlUnit(new S7ControlUnit(tmp_device_id, tmp_definition_param, tmp_address));
 		//! [Adding the CustomControlUnit]
 		
 		//! [Starting the Framework]
 		ChaosCUToolkit::getInstance()->start();
 		//! [Starting the Framework]
     } catch (CException& e) {
-        cerr<<"Exception::"<<endl;
-        std::cerr<< "in:"<<e.errorDomain << std::endl;
-        std::cerr<< "cause:"<<e.errorMessage << std::endl;
+        cerr<<"Exception:"<<endl;
+        std::cerr<< "domain	:"<<e.errorDomain << std::endl;
+        std::cerr<< "cause	:"<<e.errorMessage << std::endl;
     } catch (program_options::error &e){
         cerr << "Unable to parse command line: " << e.what() << endl;
     } catch (...){

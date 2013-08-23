@@ -21,7 +21,13 @@
 #ifndef __ControlUnitTest__S7ControlUnit__
 #define __ControlUnitTest__S7ControlUnit__
 
+
+#include <boost/ptr_container/ptr_vector.hpp>
+
 #include <chaos/cu_toolkit/ControlManager/RTAbstractControlUnit.h>
+
+#include "SiemensS7TcpDriverTypes.h"
+
 
 using namespace std;
 using namespace chaos;
@@ -30,16 +36,22 @@ using namespace boost::posix_time;
 
 namespace cu_driver = chaos::cu::driver_manager::driver;
 
-typedef struct t_plc_variable{
-	int db_num;
-	int start;
-	int byte_count;
-	chaos::DataType::DataType type;
+
+typedef struct t_plc_variable {
+	int											type;
+	cu_driver::siemens_s7::t_variable_struct	variable;
 } t_plc_variable;
 
 class S7ControlUnit : public chaos::cu::RTAbstractControlUnit {
-    string deviceID;
-	string definitionParamter;
+	// init paramter
+	string device_id, definition_paramteter, plc_addr_port;
+	
+	//plc tracked variable info
+	ptr_vector<t_plc_variable> plc_tracked_variable;
+	
+	//poi to the driver accessor
+	cu_driver::DriverAccessor *plc_s7_accessor;
+	
 protected:
     //define dataset
     void unitDefineActionAndDataset()throw(CException);
@@ -65,7 +77,7 @@ public:
     /*
      Construct a new CU with an identifier
      */
-    S7ControlUnit(string _deviceID, string _definitionParamter);
+    S7ControlUnit(string _device_id, string _definition_paramteter, string _plc_addr_port);
 	
 	/*
      Base destructor
