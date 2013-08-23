@@ -32,5 +32,5 @@ ELSE(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 	TARGET_LINK_LIBRARIES(SiemensS7DeviceDriver chaos_cutoolkit chaos_common boost_program_options boost_system boost_thread boost_chrono boost_regex boost_log boost_log_setup boost_atomic memcached msgpack msgpack-rpc mpio)
 ENDIF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
-INSTALL_TARGETS(${PROJECT_SOURCE_DIR}/bin SiemensS7ControlUnit)
-INSTALL_TARGETS(${PROJECT_SOURCE_DIR}/lib SiemensS7DeviceDriver)
+INSTALL_TARGETS(/bin SiemensS7ControlUnit)
+INSTALL_TARGETS(/lib SiemensS7DeviceDriver)
