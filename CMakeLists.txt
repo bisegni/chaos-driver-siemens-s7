@@ -14,7 +14,7 @@ ENDIF()
 ADD_DEFINITIONS(-g -O2 -Wall)
 add_definitions(-DBOOST_ALL_DYN_LINK)
 
-SET(siemens_s7_driver_src src/S7TcpDriver.cpp src/s7lib/nodave.c src/s7lib/openSocket.c src/s7lib/setport.c)
+SET(siemens_s7_driver_src src/SiemensS7TcpDriver.cpp src/SiemensS7DriverSwitch.cpp src/s7lib/nodave.c src/s7lib/openSocket.c src/s7lib/setport.c)
 SET(siemens_s7_cu_src src/main.cpp src/S7ControlUnit.cpp ${siemens_s7_driver_src})
 
 INCLUDE_DIRECTORIES(. ${PROJECT_SOURCE_DIR}/../../usr/local/include)
