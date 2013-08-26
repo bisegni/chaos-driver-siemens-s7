@@ -76,7 +76,7 @@ void S7ControlUnit::unitDefineActionAndDataset() throw(CException) {
 		if(!tmp_var) throw CException(2, "Error allcoating varible memory", __FUNCTION__);
 		
 		plc_tracked_variable.push_back(tmp_var);
-		S7CUAPP_ "name			->" << what[1];
+		S7CUAPP_ "name			->" << (tmp_var->name = what[1].str());
 		S7CUAPP_ "type			->" << (tmp_var->type = (chaos::DataType::DataType)boost::lexical_cast<int>(what[2].str()));
 		S7CUAPP_ "db number		->" << (tmp_var->variable.db_num = boost::lexical_cast<int>(what[3].str()));
 		S7CUAPP_ "start			->" << (tmp_var->variable.start = boost::lexical_cast<int>(what[4].str()));
@@ -93,7 +93,7 @@ void S7ControlUnit::unitDefineActionAndDataset() throw(CException) {
 			break;
 		}
 		
-		addAttributeToDataSet(what[1].str().c_str(),
+		addAttributeToDataSet(tmp_var->name.c_str(),
 							  "PLC Varible",
 							  (chaos::DataType::DataType)tmp_var->type,
 							  DataType::Output,
@@ -131,6 +131,8 @@ void S7ControlUnit::unitRun() throw(CException) {
 	cu_driver::DrvMsg message;
 	memset(&message, 0, sizeof(cu_driver::DrvMsg));
 	
+	CDataWrapper *acquiredData = getNewDataWrapper();
+	
 	message.opcode = cu_driver::siemens_s7::OP_GET_DOUBLE;
 	message.resultData = &tmpResult;
 	
@@ -138,11 +140,16 @@ void S7ControlUnit::unitRun() throw(CException) {
 		//prepare message for sync request to the driver
 		
 		//let the inputData point to the second field of the struct
-		message.inputData = ((char *)&plc_tracked_variable[idx]) + sizeof(int);
+		message.inputData = ((char *)&plc_tracked_variable[idx]) + sizeof(string) + sizeof(int);
 		plc_s7_accessor->send(&message);
 		S7CUAPP_ "value read =" << std::setprecision(20) << tmpResult;
+		
+		//put the messageID for test the lost of package
+		acquiredData->addDoubleValue((&plc_tracked_variable[idx])->name.c_str(), tmpResult);
 	}
 	
+	//submit acquired data
+	pushDataSet(acquiredData);
 }
 
 // Abstract method for the stop of the control unit
