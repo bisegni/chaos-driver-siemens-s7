@@ -140,7 +140,7 @@ void S7ControlUnit::unitRun() throw(CException) {
 		//let the inputData point to the second field of the struct
 		message.inputData = ((char *)&plc_tracked_variable[idx]) + sizeof(int);
 		plc_s7_accessor->send(&message);
-		S7CUAPP_ "value read" << tmpResult;
+		S7CUAPP_ "value read =" << std::setprecision(20) << tmpResult;
 	}
 	
 }
