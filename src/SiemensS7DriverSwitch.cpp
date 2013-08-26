@@ -34,7 +34,7 @@ cu_driver::MsgManagmentResultType::MsgManagmentResult cu_driver::siemens_s7::Sie
 	switch (cmd->opcode) {
 		case OP_GET_DOUBLE:
 			//cmd->data point to the paramter of the method
-			t_variable_struct *variable_info = static_cast<t_variable_struct*>(cmd->inputData);
+			PlcVariable *variable_info = static_cast<PlcVariable*>(cmd->inputData);
 			result = SiemensS7TcpDriver::getDouble(*variable_info, cmd->resultData);
 			break;
 	}

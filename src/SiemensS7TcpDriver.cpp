@@ -114,12 +114,12 @@ void cu_driver::siemens_s7::SiemensS7TcpDriver::driverDeinit() throw(chaos::CExc
 
 }
 
-cu_driver::MsgManagmentResultType::MsgManagmentResult cu_driver::siemens_s7::SiemensS7TcpDriver::getDouble(t_variable_struct& variable_info, void *mem_for_result) {
+cu_driver::MsgManagmentResultType::MsgManagmentResult cu_driver::siemens_s7::SiemensS7TcpDriver::getDouble(PlcVariable& variable_info, void *mem_for_result) {
 	int res = 0;
 	double *usr_doub_ptr = static_cast<double*>(mem_for_result);
 	res=daveReadBytes(dc, daveDB, variable_info.db_num, variable_info.start, variable_info.byte_count, NULL);
 	if(0==res) {
-		*usr_doub_ptr = daveGetFloat(dc);
+		*usr_doub_ptr = static_cast<double>(daveGetFloat(dc));
 		return cu_driver::MsgManagmentResultType::MMR_EXECUTED;
 	} else {
 		return cu_driver::MsgManagmentResultType::MMR_ERROR;

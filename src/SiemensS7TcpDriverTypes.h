@@ -37,7 +37,7 @@ namespace chaos {
 						int start;
 						int byte_count;
 						int max_len;
-					} t_variable_struct;
+					} PlcVariable;
 				}
 			}
 		}

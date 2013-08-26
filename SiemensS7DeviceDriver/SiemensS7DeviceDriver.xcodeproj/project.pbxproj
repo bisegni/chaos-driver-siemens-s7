@@ -14,8 +14,10 @@
 		3203CBD617C389E5000C9FE8 /* openSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 3203CBCA17C389E5000C9FE8 /* openSocket.h */; };
 		3203CBD717C389E5000C9FE8 /* setport.c in Sources */ = {isa = PBXBuildFile; fileRef = 3203CBCB17C389E5000C9FE8 /* setport.c */; };
 		3203CBD817C389E5000C9FE8 /* setport.h in Headers */ = {isa = PBXBuildFile; fileRef = 3203CBCC17C389E5000C9FE8 /* setport.h */; };
-		3203CBD917C389E5000C9FE8 /* S7TcpDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3203CBCD17C389E5000C9FE8 /* S7TcpDriver.cpp */; };
-		3203CBDA17C389E5000C9FE8 /* S7TcpDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 3203CBCE17C389E5000C9FE8 /* S7TcpDriver.h */; };
+		328CB61417CB464C003EFD6D /* SiemensS7DriverSwitch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 328CB61017CB464C003EFD6D /* SiemensS7DriverSwitch.cpp */; };
+		328CB61517CB464C003EFD6D /* SiemensS7TcpDriver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 328CB61117CB464C003EFD6D /* SiemensS7TcpDriver.cpp */; };
+		328CB61617CB464C003EFD6D /* SiemensS7TcpDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 328CB61217CB464C003EFD6D /* SiemensS7TcpDriver.h */; };
+		328CB61717CB464C003EFD6D /* SiemensS7TcpDriverTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 328CB61317CB464C003EFD6D /* SiemensS7TcpDriverTypes.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +29,10 @@
 		3203CBCA17C389E5000C9FE8 /* openSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = openSocket.h; sourceTree = "<group>"; };
 		3203CBCB17C389E5000C9FE8 /* setport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = setport.c; sourceTree = "<group>"; };
 		3203CBCC17C389E5000C9FE8 /* setport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = setport.h; sourceTree = "<group>"; };
-		3203CBCD17C389E5000C9FE8 /* S7TcpDriver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = S7TcpDriver.cpp; sourceTree = "<group>"; };
-		3203CBCE17C389E5000C9FE8 /* S7TcpDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = S7TcpDriver.h; sourceTree = "<group>"; };
+		328CB61017CB464C003EFD6D /* SiemensS7DriverSwitch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SiemensS7DriverSwitch.cpp; sourceTree = "<group>"; };
+		328CB61117CB464C003EFD6D /* SiemensS7TcpDriver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SiemensS7TcpDriver.cpp; sourceTree = "<group>"; };
+		328CB61217CB464C003EFD6D /* SiemensS7TcpDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiemensS7TcpDriver.h; sourceTree = "<group>"; };
+		328CB61317CB464C003EFD6D /* SiemensS7TcpDriverTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SiemensS7TcpDriverTypes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +65,11 @@
 		3203CBC117C389E5000C9FE8 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				328CB61017CB464C003EFD6D /* SiemensS7DriverSwitch.cpp */,
+				328CB61117CB464C003EFD6D /* SiemensS7TcpDriver.cpp */,
+				328CB61217CB464C003EFD6D /* SiemensS7TcpDriver.h */,
+				328CB61317CB464C003EFD6D /* SiemensS7TcpDriverTypes.h */,
 				3203CBC517C389E5000C9FE8 /* s7lib */,
-				3203CBCD17C389E5000C9FE8 /* S7TcpDriver.cpp */,
-				3203CBCE17C389E5000C9FE8 /* S7TcpDriver.h */,
 			);
 			name = src;
 			path = ../src;
@@ -92,8 +98,9 @@
 			files = (
 				3203CBD217C389E5000C9FE8 /* log2.h in Headers */,
 				3203CBD817C389E5000C9FE8 /* setport.h in Headers */,
-				3203CBDA17C389E5000C9FE8 /* S7TcpDriver.h in Headers */,
 				3203CBD617C389E5000C9FE8 /* openSocket.h in Headers */,
+				328CB61717CB464C003EFD6D /* SiemensS7TcpDriverTypes.h in Headers */,
+				328CB61617CB464C003EFD6D /* SiemensS7TcpDriver.h in Headers */,
 				3203CBD417C389E5000C9FE8 /* nodave.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,8 +158,9 @@
 			files = (
 				3203CBD517C389E5000C9FE8 /* openSocket.c in Sources */,
 				3203CBD717C389E5000C9FE8 /* setport.c in Sources */,
+				328CB61417CB464C003EFD6D /* SiemensS7DriverSwitch.cpp in Sources */,
 				3203CBD317C389E5000C9FE8 /* nodave.c in Sources */,
-				3203CBD917C389E5000C9FE8 /* S7TcpDriver.cpp in Sources */,
+				328CB61517CB464C003EFD6D /* SiemensS7TcpDriver.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

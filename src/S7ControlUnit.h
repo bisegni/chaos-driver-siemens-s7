@@ -39,7 +39,7 @@ namespace cu_driver = chaos::cu::driver_manager::driver;
 
 typedef struct t_plc_variable {
 	int											type;
-	cu_driver::siemens_s7::t_variable_struct	variable;
+	cu_driver::siemens_s7::PlcVariable	variable;
 } t_plc_variable;
 
 class S7ControlUnit : public chaos::cu::RTAbstractControlUnit {

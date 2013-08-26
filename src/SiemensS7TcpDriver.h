@@ -56,7 +56,7 @@ namespace chaos {
 						//! Return a variable of the type boolean
 						/*!
 						 */
-						driver::MsgManagmentResultType::MsgManagmentResult getDouble(t_variable_struct& variable_info, void *mem_for_result);
+						driver::MsgManagmentResultType::MsgManagmentResult getDouble(PlcVariable& variable_info, void *mem_for_result);
 						
 					public:
 						SiemensS7TcpDriver();
