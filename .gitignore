@@ -10,6 +10,7 @@ install_manifest.txt
 *.xcuserdatadbuild
 SiemensS7ControlUnit/SiemensS7ControlUnit.xcodeproj/xcuserdata/*
 SiemensS7.xcworkspace/xcuserdata/*
+SiemensS7.xcworkspace/xcshareddata/*
 build/SiemensS7ControlUnit
 build/SiemensS7DeviceDriver.extension
 build
